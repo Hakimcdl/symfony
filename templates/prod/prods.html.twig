@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mes produits</h1>
+    {{ dump(prodsActive) }}
+    {{ dump(prodsUnactive) }}
+    <section>
+        <h2>Mes produits Actifs</h2>
+        {% for prod in prodsActive %}
+            <article>
+                <h3>
+                    {{ prod.Name }}
+                </h3>
+                <p>
+                    {{ prod.Description }}
+                </p>
+                <span>
+                    Le prix du produit est de : {{ prod.Price }}
+                </span>
+                <span>
+                    Le stock restant est de : {{ prod.Stock }}
+                </span>
+                <div>
+                <img src="{{ asset('uploadDirectory/' ~ prod.img) }}">
+                </div>
+                <a href="{{ path("changeActiveProd", {"id":prod.id}) }}">Désactiver</a>
+                <a href="{{ path("singleShowProd", {"id":prod.id}) }}">Voir</a>
+                <a href="{{ path("updateProd", {"id":prod.id}) }}">Modifier</a>
+            </article>
+        {% endfor %}
+    </section>
+
+    <section>
+        <h2>Mes produits Inactifs</h2>
+        {% for prod in prodsUnactive %}
+            <article>
+                <h3>
+                    {{ prod.Name }}
+                </h3>
+                <p>
+                    {{ prod.Description }}
+                </p>
+                <span>
+                    Le prix du produit est de : {{ prod.Price }}
+                </span>
+                <span>
+                    Le stock restant est de : {{ prod.Stock }}
+                </span>
+                <div>
+                    <img src="{{ asset('uploadDirectory/' ~ prod.img) }}">
+                </div>
+                <a href="{{ path("changeActiveProd", {"id":prod.id}) }}">Activer</a>
+                <a href="{{ path("deleteUnactiveProd", {"id":prod.id}) }}">Supprimer</a>
+                <a href="{{ path("updateProd", {"id":prod.id}) }}">Modifier</a>
+            </article>
+        {% endfor %}
+    </section>
+</body>
+</html>
